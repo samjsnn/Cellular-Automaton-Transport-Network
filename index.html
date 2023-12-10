@@ -44,7 +44,7 @@
 
     </style>
 
-    <script src = "gl2.js"></script>
+    <script src = "gl.js"></script>
     
     <!-- quad vertices-->
     <script id = "v-quad" type = "text/glsl">#version 300 es
@@ -182,7 +182,7 @@
       }
     </script>
 
-    <!-- colour render -->
+    <!-- colour render vec4 + vec3 -->
     <script id = "f-img" type = "text/glsl">#version 300 es
       precision mediump float;
 
@@ -223,15 +223,25 @@ vec3 hsv2rgb (vec3 c)
       
       <div><p>
 
+	  <h3> To adjust agent paramaters:</h3>
 	  
-	  <ul>
-	    <li>A/S,O/P,T/Y: adjust agennt parameters (sensory angle/offset, turning ratio).</li>
-	    <li>D/F,E/R: adjust environment parameters (trail diffusion/evaporation).</li>
+	    <li>A/S = adjust sensory angle</li>
+      <li>O/P = adjust sensory offset</li>
+      <li>T/Y = adjust turn angle</li>
+    
+    <h3> To adjust environment parameters:</h3>
+	    <li>D/F = adjust diffusion.</li>
+      <li>E/R = adjust evaporation</li>
 	    <li>LMB/RMB/wheel: erase/deposit food/pheromone trail</li>
 	    <li>&uarr;/&darr;: decrease/increase timestep.</li>
 	  </ul>
       </p></div>
       <script src = "physarum.js"></script>
+      <h3> Paramater Notes </h3>
+      <li>The sensory angle is the breadth of each agent's sensory perception, especially in relation to directional sensing. A wider sensory angle allows the agent to detect stimuli over a broader range.</li>
+      <li> Sensory offset is the distance ahead of each agent where it is able to sense it's environment.</li>
+      <li>Higher trail diffusion leads to wider, more dispersed trails. This affects the likelihood of agents encountering and following these trails.</li>
+      <li>Higher trail evaporation rates lead to shorter-lived trails which in turn requires agents to constantly explore new paths and avoid relying on outdated trails.</li>
       <div id = "credits">
         hellosamjsn@gmail.com
 	

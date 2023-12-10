@@ -9,10 +9,12 @@ if (!ext) {
   throw "error: rendering to float texture not supported.";
 }
 
-const W = 720; /* W-by-W canvas */
-const M = 256; /* M^2 particles */
-let N = 1e4; /* population */
+// Set canvas dimensions and define the number of particles
+const W = 720; //720 /* W-by-W canvas */
+const M = 256; //256 /* M^2 particles */
+let N = 200; //1e4; /* population */
 
+// Compile and create shader prog from script elements
 const vquad = makeShader(
   gl,
   document.getElementById("v-quad").text,
@@ -47,11 +49,11 @@ const fimg = makeShader(
   gl.FRAGMENT_SHADER
 );
 
-/* quad vertices */
+// Create vertex buffer for quad vertices
 const x = new Float32Array([1, 1, 1, -1, -1, 1, -1, -1]);
 const xbuf = makeBuffer(gl, x, gl.STATIC_DRAW);
 
-/* vertex hashmap */
+// Create buffer for vertex hashmap (mapping 2D grid coordinates)
 const ij = new Float32Array(2 * M * M);
 for (let i = 0; i < M; ++i) {
   for (let j = 0; j < M; ++j) {
@@ -62,9 +64,10 @@ for (let i = 0; i < M; ++i) {
 }
 const ijbuf = makeBuffer(gl, ij, gl.STATIC_DRAW);
 
+// Define uniform variables for shaders
 const uniforms = {};
 
-/* program for timestepping the particles */
+// Create prog for timestepping particles and fetch uniform locations
 const ppdata = makeProgram(gl, vquad, fpdata);
 const ppdxloc = gl.getAttribLocation(ppdata, "x");
 
@@ -185,15 +188,15 @@ const texq = makeTexture(
 );
 const fbfq = makeFramebuffer(gl, texq, 3);
 
-let ping = true; /* reading from a/p, rendering to b/q */
+let ping = true; // Flag for alternating between sets of textures (ping-ponging)
 
-/* system time */
-const dt = 0.1;
-const T = 1;
+// system time variables
+const dt = 0.1; //Timestep duration
+const T = 1; // Total simulation time
 
-let fastforward = 2;
+let fastforward = 2; // Speed-up factor for simulation
 
-/* diffusion & evaporation parameters */
+// diffusion & evaporation parameters 
 const fu = {
   f: 0,
   evap: 0.01,
@@ -205,14 +208,14 @@ const fu = {
 let pending_actn =
   []; /* ad-hoc solution for faster-than-timestep interactions. */
 
-/* agent behaviour parameters */
+// agent behaviour parameters 
 const pu = {
   p: 2,
   f: 0,
   t: 0,
   off: Math.pow(1.9, 5) / 720, // sensory offset
-  ang: 0.16, // sensory angle
-  trn: 0.75, // turn angle
+  ang: 0.16, //0.16 // sensory angle
+  trn: 0.75, //0.75 // turn angle
 };
 
 /* interactivity */
@@ -250,21 +253,21 @@ window.addEventListener("keydown", (ev) => {
   switch (ev.key.toUpperCase()) {
     // agent parameters
 
-    case "A":
+    case "A": // adjust sensory angle
       pu.ang -= 0.04;
       break;
-    case "S":
+    case "S": // adjust sensory angle 
       pu.ang += 0.04;
       break;
 
-    case "O":
+    case "O": // adjust sensory offset
       pu.off /= 1.9;
       break;
     case "P":
       pu.off *= 1.9;
       break;
 
-    case "T":
+    case "T": // adjust turn angle
       pu.trn -= 0.25;
       break;
     case "Y":
@@ -272,14 +275,14 @@ window.addEventListener("keydown", (ev) => {
       break;
 
     // environment parameters
-    case "E":
+    case "E": // adjust pheremone evaporation
       fu.evap -= 0.05;
       break;
     case "R":
       fu.evap += 0.05;
       break;
 
-    case "D":
+    case "D": //adjust diffusion
       fu.diff -= 0.06;
       break;
     case "F":
@@ -373,6 +376,7 @@ function timestep() {
     //render(gl, null, null, gl.POINTS, 0, M*M);
 
     ping = !ping;
+  
   }
 
   /* render colour output */
