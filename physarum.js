@@ -19,7 +19,7 @@ const vquad = makeShader(
   gl,
   document.getElementById("v-quad").text,
   gl.VERTEX_SHADER
-);
+);//
 
 const fpdata = makeShader(
   gl,

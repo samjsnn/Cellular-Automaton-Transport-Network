@@ -19,6 +19,7 @@ function makeProgram (gl, vsh, fsh) {
 		gl.getProgramInfoLog(prg);
 	}
 	return prg;
+	//
 }
 
 function makeTexture (gl, texunit, fi, w, h, f, type, data, minf, magf, ws, wt) {
