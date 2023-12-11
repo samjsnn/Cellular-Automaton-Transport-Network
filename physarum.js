@@ -12,7 +12,7 @@ if (!ext) {
 // Set canvas dimensions and define the number of particles
 const W = 720; //720 /* W-by-W canvas */
 const M = 256; //256 /* M^2 particles */
-let N = 200; //1e4; /* population */
+let N = 10000; //1e4; /* population */
 
 // Compile and create shader prog from script elements
 const vquad = makeShader(
