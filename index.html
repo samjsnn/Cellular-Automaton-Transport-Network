@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <style>
       html, body {
@@ -27,6 +28,7 @@
       #main-container {
         display: flex;
         justify-content: space-between;
+        align-items: flex-start;
       }
 
       p, li {
@@ -39,36 +41,63 @@
         display: flex;
         justify-content: flex-end;
         align-items: flex-start;
-        width: 100%;
+        
       }
       #general-text {
         margin-top: 50px;
-        padding-top:0px;
         padding-left: 20px;
       }
       #text-container {
         display: flex;
         flex-direction: column;
       }
-
+      
       /* World Canvas Style */
       #world {
-        border: 1px #ccc none;
-        margin-right: 50px; /* Space between canvas and text */
-        margin-top: 30px;
-        margin-left: 25px;
-        width: 720px;
-        height: 720px;
+          border: 1px #ccc none;
+          margin: 30px 30px 30px 25px;
+          width: 60%;
+          height: auto;
+          max-width: 720px;
+          max-height: 92vh;
       }
 
       /* Text Content Style */
       #text-content {
-        max-width: 400px; /* Adjust as needed */
+        max-width: 400px;
+        margin-right: 20px; /* Adjust as needed */
       }
 
       #credits {
         margin-top: 16px;
         font-size: 12px;
+      }
+
+      @media screen and (max-width: 768px) {
+        #main-container {
+          flex-direction: column; /* Stack elements vertically */
+        }
+
+        #content-wrapper {
+          position: static; /* Reset position */
+          margin-bottom: 0px;
+        }
+
+        #world {
+          margin: 25px 25px 25px 25px; /* Add some margin around the canvas */
+          width: 90%; /* Adjust width to fit screen */
+          height: auto; /* Adjust height accordingly */
+        }
+
+        #text-container {
+          width: 90%;
+          margin-top: 20px;
+        }
+
+        #general-text, #content-wrapper {
+          margin-top: 0px;
+          padding-left: 15; /* Add spacing between text sections */
+        }
       }
     </style>
 
@@ -250,7 +279,6 @@ vec3 hsv2rgb (vec3 c)
           <h2>Physarum Network Simulation</h2>
           <!-- Additional content for content-wrapper, if any -->
         </div>
-
         <div id="general-text">
           <h3>Brief Description:
           <p class="gen-text">Physarum Polycephalum, also known as slime mold is a single celled organism capable of displaying intelligent behaviour through it's ability to form efficient food networks. The mold does not have a central control mechanism but instead relies on local interactions within its cellular structure. This allows the slime mold to adapt to its environment without a central decision making process.</p>
@@ -281,7 +309,6 @@ vec3 hsv2rgb (vec3 c)
           </ul>
         </div>
       </div>
-
       <canvas id="world" width="720" height="720"></canvas>
     </div>
 

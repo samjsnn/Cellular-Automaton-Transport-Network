@@ -1,5 +1,5 @@
 # Physarum-Polycephalum-Network-Simulation
-Physarum Polycephalum is a unicellular organism that exhibits swarm like intelligence in it's ability to form efficient food networks. The goal of this project is to demonstrate how interactions at a micro level lead to the emergence of complex emergent behaviours observed in real slime molds.
+Physarum Polycephalum is a unicellular organism that exhibits swarm like intelligence in it's ability to form efficient food networks. The goal of this project is to demonstrate how interactions at a micro level lead to the complex emergent behaviours observed in real slime molds.
 
 ![gif4b](https://github.com/samjsnn/Physarum-Transport-Network/assets/106383967/42d7bdcf-e737-4ca0-853b-f51c92bf18d1)
 
