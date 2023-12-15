@@ -15,12 +15,13 @@ In addition to agent parameters the simulation environment is controlled by two 
 
 - Evaporation Rate: Determines the longevity of the pheromone trails. Faster evaporation rates result in shorter-lived trails, requiring agents to constantly explore and adapt to new paths, avoiding reliance on outdated information.
 
-You can interact with the simulation in real-time to see how changes in parameters affect network formation. The controls are:
+You can interact with the simulation in real time to see how changes in parameters affect network formation. 
+The controls are:
 
-A/S: Adjust Sensory Angle
-O/P: Adjust Sensory Offset
-T/Y: Adjust Turn Angle
-D/F: Adjust Diffusion Rate
-E/R: Adjust Evaporation Rate
+-A/S: Adjust Sensory Angle
+-O/P: Adjust Sensory Offset
+-T/Y: Adjust Turn Angle
+-D/F: Adjust Diffusion Rate
+-E/R: Adjust Evaporation Rate
 
 https://samjsnn.github.io/Physarum-Transport-Network/
