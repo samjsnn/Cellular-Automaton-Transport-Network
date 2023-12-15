@@ -23,11 +23,12 @@
         top: 0;
         left: 0;
         padding-top:0px;
-        padding-left: 20px; 
+        padding-left: 20px;
+        margin-bottom: 20px;
       }
       #main-container {
         display: flex;
-        justify-content: space-between;
+        
         align-items: flex-start;
       }
 
@@ -69,22 +70,24 @@
       }
 
       #credits {
-        margin-top: 16px;
-        font-size: 12px;
+        margin-top: 60px;
+        margin-bottom: 20px;
+        font-size: 13px;
+        color:aquamarine
       }
 
       @media screen and (max-width: 768px) {
         #main-container {
-          flex-direction: column; /* Stack elements vertically */
+          flex-direction: column-reverse; /* Stack elements vertically */
         }
 
         #content-wrapper {
           position: static; /* Reset position */
-          margin-bottom: 0px;
+          margin-bottom: -10px;
         }
 
         #world {
-          margin: 25px 25px 25px 25px; /* Add some margin around the canvas */
+          margin: 30px 25px 0px 25px; /* Add some margin around the canvas */
           width: 90%; /* Adjust width to fit screen */
           height: auto; /* Adjust height accordingly */
         }
@@ -307,6 +310,9 @@ vec3 hsv2rgb (vec3 c)
             <li>Higher trail diffusion leads to wider, more dispersed trails. This affects the likelihood of agents encountering and following these trails.</li>
             <li>Higher trail evaporation rates lead to shorter lived trails which in turn requires agents to constantly explore new paths and avoid relying on outdated trails.</li>
           </ul>
+          <div id="credits">
+            hellosamjsn@gmail.com
+          </div>
         </div>
       </div>
       <canvas id="world" width="720" height="720"></canvas>
