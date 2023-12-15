@@ -10,9 +10,9 @@ if (!ext) {
 }
 
 // Set canvas dimensions and define the number of particles
-const W = 720; //720 /* W-by-W canvas */
-const M = 256; //256 /* M^2 particles */
-let N = 10000; //1e4; /* population */
+const W = 720; //720  W-by-W canvas 
+const M = 256; //256 M^2 particles 
+let N = 6000; //1e4 population 
 
 // Compile and create shader prog from script elements
 const vquad = makeShader(
@@ -60,7 +60,7 @@ for (let i = 0; i < M; ++i) {
     ij[2 * (i * M + j)] = i;
     ij[2 * (i * M + j) + 1] = j;
   }
-  //
+
 }
 const ijbuf = makeBuffer(gl, ij, gl.STATIC_DRAW);
 
@@ -77,7 +77,7 @@ uniforms.ppdata = ["f", "p", "t", "off", "ang", "trn"].map((name, i) => ({
   type: i < 2 ? "1i" : "1f",
 }));
 
-/* program for timestepping the field */
+// program for timestepping the field
 const pfdata = makeProgram(gl, vquad, ffdata);
 const pfdxloc = gl.getAttribLocation(pfdata, "x");
 
@@ -89,25 +89,25 @@ uniforms.pfdata = ["f", "evap", "diff", "actn", "diam", "curs"].map(
   })
 );
 
-/* program for rendering particles onto field */
+// program for rendering particles onto field
 const pppart = makeProgram(gl, vppart, fppart);
 const pppijloc = gl.getAttribLocation(pppart, "ij");
 const pppfloc = gl.getUniformLocation(pppart, "f");
 const pppploc = gl.getUniformLocation(pppart, "p");
 
-/* program for pretty output */
+// program for visual output 
 const pimg = makeProgram(gl, vquad, fimg);
 const pixloc = gl.getAttribLocation(pimg, "x");
 const pifloc = gl.getUniformLocation(pimg, "f");
 
-/* two textures / framebuffers for ping-ponging the field */
+// two textures / framebuffers for ping-ponging the field
 const texadata = new Uint8Array(W * W * 4);
 for (let i = 0; i < W; ++i) {
   for (let j = 0; j < W; ++j) {
-    texadata[4 * (W * i + j)] = 0; /* trail */
+    texadata[4 * (W * i + j)] = 0; // trail */
     texadata[4 * (W * i + j) + 1] = 0;
     texadata[4 * (W * i + j) + 2] = 0;
-    texadata[4 * (W * i + j) + 3] = 0; /* cell available: 0 / 1 */
+    texadata[4 * (W * i + j) + 3] = 0; // cell available: 0 / 1
   }
 }
 const texa = makeTexture(
@@ -142,7 +142,7 @@ const texb = makeTexture(
 );
 const fbfb = makeFramebuffer(gl, texb, 1);
 
-/* two textures / framebuffers for ping-ponging the particle data */
+// two textures / framebuffers for ping-ponging the particle data 
 const texpdata = new Float32Array(M * M * 4);
 for (let i = 0; i < M * M; ++i) {
   /*
@@ -153,8 +153,8 @@ for (let i = 0; i < M * M; ++i) {
     */
   texpdata[4 * i] = Math.random();
   texpdata[4 * i + 1] = Math.random();
-  texpdata[4 * i + 2] = Math.random(); /* direction  */
-  texpdata[4 * i + 3] = 1; /* state      */
+  texpdata[4 * i + 2] = Math.random(); // direction  
+  texpdata[4 * i + 3] = 1; // state      
 }
 const texp = makeTexture(
   gl,
@@ -206,7 +206,7 @@ const fu = {
   curs: [0.2, 0.2],
 };
 let pending_actn =
-  []; /* ad-hoc solution for faster-than-timestep interactions. */
+  [];
 
 // agent behaviour parameters 
 const pu = {
@@ -214,11 +214,11 @@ const pu = {
   f: 0,
   t: 0,
   off: Math.pow(1.9, 5) / 720, // sensory offset
-  ang: 0.16, //0.16 // sensory angle
-  trn: 0.75, //0.75 // turn angle
+  ang: 0.16, //0.16  sensory angle
+  trn: 0.75, //0.75  turn angle
 };
 
-/* interactivity */
+// interactivity 
 canv.addEventListener("mousemove", (ev) => {
   fu.curs[0] = ev.offsetX / 720;
   fu.curs[1] = 1 - ev.offsetY / 720;
@@ -331,7 +331,7 @@ window.addEventListener("keydown", (ev) => {
   console.log(`diffusion = ${fu.diff}\nevaporation = ${fu.evap}`);
 });
 
-/* main loop */
+// main loop 
 function timestep() {
   window.requestAnimationFrame(timestep);
 
@@ -341,7 +341,7 @@ function timestep() {
       fu.actn = pending_actn.shift();
     }
 
-    /* timestep background field */
+    // timestep background field 
     setBuffer(gl, pfdata, pfdxloc, xbuf, 2, gl.FLOAT);
 
     fu.f = ping ? 0 : 1;
@@ -353,7 +353,7 @@ function timestep() {
     render(gl, null, ping ? fbfb : fbfa, gl.TRIANGLE_STRIP, 0, 4);
     // render(gl, null, null, gl.TRIANGLE_STRIP, 0, 4);
 
-    /*timestep particles */
+    //timestep particles 
     setBuffer(gl, ppdata, ppdxloc, xbuf, 2, gl.FLOAT);
 
     pu.p = ping ? 2 : 3;
@@ -367,7 +367,7 @@ function timestep() {
     render(gl, null, ping ? fbfq : fbfp, gl.TRIANGLE_STRIP, 0, 4);
     // render(gl, null, null, gl.TRIANGLE_STRIP, 0, 4);
 
-    /* render points */
+    // render points 
     setBuffer(gl, pppart, pppijloc, ijbuf, 2, gl.FLOAT);
     setUniform(gl, null, pppfloc, "1i", ping ? 0 : 1);
     setUniform(gl, null, pppploc, "1i", ping ? 2 : 3);
@@ -379,7 +379,7 @@ function timestep() {
   
   }
 
-  /* render colour output */
+  // render colour output 
   setBuffer(gl, pimg, pixloc, xbuf, 2, gl.FLOAT);
   setUniform(gl, null, pifloc, "1i", ping ? 1 : 0);
   render(gl, null, null, gl.TRIANGLE_STRIP, 0, 4);

@@ -1,49 +1,78 @@
 <!DOCTYPE HTML>
 <html>
   <head>
-    <link href = 'https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel = 'stylesheet' type = 'text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <style>
       html, body {
-	  margin: 0; padding: 0;
-	  background-color: #021c00;
-	  color: #638e8c;
-
-	  font-family: 'open sans', sans-serif;
-	  font-size: 16px;
+        margin: 0; padding: 0;
+        background-color: #021c00;
+        color: #2D8D2D;
+        font-family: 'open sans', sans-serif;
+        font-size: 15px;
       }
       h2 {
-	  font-size: 20px;
-	  color: rgb(115, 156, 156);
+        font-size: 20px;
+        color: #2D8D2D
+      }
+      .gen-text {
+        font-size: 15px; 
+      }
+      #content-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        padding-top:0px;
+        padding-left: 20px; 
+      }
+      #main-container {
+        display: flex;
+        justify-content: space-between;
       }
 
-      /*UI*/
+      p, li {
+        font-size: 15px;
+        font-weight: normal;
+      }
 
+      /* Container Style */
       #container {
-	  width: 720px;
-	  margin: 4px auto;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        width: 100%;
       }
-      #credits{
-	  margin-top: 16px;
-	  font-size: 12px;
+      #general-text {
+        margin-top: 50px;
+        padding-top:0px;
+        padding-left: 20px;
+      }
+      #text-container {
+        display: flex;
+        flex-direction: column;
       }
 
-      /* WORLD*/
-
+      /* World Canvas Style */
       #world {
-	  border: 1px #ccc none;/*dashed;*/
-
-	  margin: 4px auto;
-
-	  position: relative;
-
-	  width: 720px;
-	  height: 720px;
-
-	  /*overflow: hidden;*/
+        border: 1px #ccc none;
+        margin-right: 50px; /* Space between canvas and text */
+        margin-top: 30px;
+        margin-left: 25px;
+        width: 720px;
+        height: 720px;
       }
 
+      /* Text Content Style */
+      #text-content {
+        max-width: 400px; /* Adjust as needed */
+      }
+
+      #credits {
+        margin-top: 16px;
+        font-size: 12px;
+      }
     </style>
 
+    <!-- JavaScript and GLSL scripts... -->
     <script src = "gl.js"></script>
     
     <!-- quad vertices-->
@@ -212,42 +241,50 @@ vec3 hsv2rgb (vec3 c)
 	  fragc = palette(prev.r);
       }
     </script>
-
   </head>
   <body>
 
-    <div id = "container">
-      <h2>Physarum Transport Network</h2>
+    <div id="main-container">
+      <div id="text-container">
+        <div id="content-wrapper">
+          <h2>Physarum Network Simulation</h2>
+          <!-- Additional content for content-wrapper, if any -->
+        </div>
 
-      <canvas id = "world" width = "720" height = "720"></canvas>
-      
-      <div><p>
+        <div id="general-text">
+          <h3>Brief Description:
+          <p class="gen-text">Physarum Polycephalum, also known as slime mold is a single celled organism capable of displaying intelligent behaviour through it's ability to form efficient food networks. The mold does not have a central control mechanism but instead relies on local interactions within its cellular structure. This allows the slime mold to adapt to its environment without a central decision making process.</p>
+          <p>This simulation was created to demonstrate how interactions between individual agents within the network can result in complex emergent behaviours. The simulation uses pheromone trails to replicate the protoplasm deposited during the formation of a Physarum network. When an agent encounters a previously laid trail it interacts with it under a set of predetermined rules. This behaviour mimics the slime molds tendency to reinforce successful paths that lead to nutrients. By altering the agent and environment parameters below, the network will change as each individual agent interacts with the trails in different ways.</p>
+            
+          </h3>
+          <h3>To adjust agent parameters:</h3>
+          <ul>
+            <li>A/S = adjust sensory angle</li>
+            <li>O/P = adjust sensory offset</li>
+            <li>T/Y = adjust turn angle</li>
+          </ul>
+          
+          <h3>To adjust environment parameters:</h3>
+          <ul>
+            <li>D/F = adjust diffusion</li>
+            <li>E/R = adjust evaporation</li>
+            <li>LMB/RMB/wheel: erase/deposit food/pheromone trail</li>
+            <li>&uarr;/&darr;: decrease/increase timestep</li>
+          </ul>
 
-	  <h3> To adjust agent paramaters:</h3>
-	  
-	    <li>A/S = adjust sensory angle</li>
-      <li>O/P = adjust sensory offset</li>
-      <li>T/Y = adjust turn angle</li>
-    
-    <h3> To adjust environment parameters:</h3>
-	    <li>D/F = adjust diffusion.</li>
-      <li>E/R = adjust evaporation</li>
-	    <li>LMB/RMB/wheel: erase/deposit food/pheromone trail</li>
-	    <li>&uarr;/&darr;: decrease/increase timestep.</li>
-	  </ul>
-      </p></div>
-      <script src = "physarum.js"></script>
-      <h3> Paramater Notes </h3>
-      <li>The sensory angle is the breadth of each agent's sensory perception, especially in relation to directional sensing. A wider sensory angle allows the agent to detect stimuli over a broader range.</li>
-      <li> Sensory offset is the distance ahead of each agent where it is able to sense it's environment.</li>
-      <li>Higher trail diffusion leads to wider, more dispersed trails. This affects the likelihood of agents encountering and following these trails.</li>
-      <li>Higher trail evaporation rates lead to shorter-lived trails which in turn requires agents to constantly explore new paths and avoid relying on outdated trails .</li>
-      <div id = "credits">
-        hellosamjsn@gmail.com
-	
+          <h3>Parameter Notes</h3>
+          <ul>
+            <li>The sensory angle is the breadth of each agent's sensory perception, especially in relation to directional sensing. A wider sensory angle allows the agent to detect stimuli over a broader range.</li>
+            <li>Sensory offset is the distance ahead of each agent where it is able to sense it's environment.</li>
+            <li>Higher trail diffusion leads to wider, more dispersed trails. This affects the likelihood of agents encountering and following these trails.</li>
+            <li>Higher trail evaporation rates lead to shorter lived trails which in turn requires agents to constantly explore new paths and avoid relying on outdated trails.</li>
+          </ul>
+        </div>
       </div>
 
+      <canvas id="world" width="720" height="720"></canvas>
     </div>
 
+    <script src="physarum.js"></script>
   </body>
 </html>
