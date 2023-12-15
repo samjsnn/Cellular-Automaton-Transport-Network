@@ -1,6 +1,4 @@
 # Physarum-Polycephalum-Network-Simulation
-Interactive CA transport network model
-
-An interactive transport network simulation inspired by the behaviour of Physarum polycephalum, a slime mold known for its ability to form efficient networks.
+Physarum Polycephalum is a unicellular organism that exhibits swarm like intelligence in it's ability to form efficient food networks. The goal of this project is to demonstrate how interactions at a micro level lead to the emergence of complex emergent behaviours observed in real slime molds.
 
 https://samjsnn.github.io/Physarum-Transport-Network/
