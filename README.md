@@ -19,9 +19,14 @@ You can interact with the simulation in real time to see how changes in paramete
 The controls are:
 
 -A/S: Adjust Sensory Angle
+
 -O/P: Adjust Sensory Offset
+
 -T/Y: Adjust Turn Angle
+
 -D/F: Adjust Diffusion Rate
+
 -E/R: Adjust Evaporation Rate
 
+The simulation:
 https://samjsnn.github.io/Physarum-Transport-Network/
