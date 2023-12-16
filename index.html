@@ -120,11 +120,13 @@
 
         #content-wrapper {
           position: static; /* Reset position */
+          font-size: 17px;
           margin-bottom: -10px;
+          margin: 0px 0px 0px 0px;
         }
 
         #world {
-          margin: 30px 25px 0px 25px; 
+          margin: 20px 25px 0px 20px; 
           width: 88.5%; 
           height: auto; 
         }
@@ -141,14 +143,13 @@
 
         #button-container {
           display: grid;
-          grid-template-columns: repeat(2, 1fr); 
           gap: 3px; 
           width: 100%; 
-          margin: 10px 0; 
+          margin: 10px 20px; 
         }
 
         #control-buttons button {
-          font-size: 8px; 
+          font-size: 11px; 
           padding: 3px 3px;
           margin: 0;
         }
@@ -356,7 +357,7 @@ vec3 hsv2rgb (vec3 c)
         <div id="general-text">
           <h3>Brief Description:
           <p class="gen-text">Physarum Polycephalum, also known as slime mold is a single celled organism capable of displaying intelligent behaviour through it's ability to form efficient food networks. The mold does not have a central control mechanism but instead relies on local interactions within its cellular structure. This allows the slime mold to adapt to its environment without a central decision making process.</p>
-          <p>This simulation was created to demonstrate how interactions between individual agents within the network can result in complex emergent behaviours. The simulation uses pheromone trails to replicate the protoplasm deposited during the formation of a Physarum network. When an agent encounters a previously laid trail it interacts with it under a set of predetermined rules. This behaviour mimics the slime molds tendency to reinforce successful paths that lead to nutrients. By altering the agent and environment parameters below, the network will change as each individual agent interacts with the trails in different ways.</p>
+          <p>This simulation was created to demonstrate how interactions between individual agents within the network can result in complex emergent behaviours. The simulation uses pheromone trails to replicate the protoplasm deposited during the formation of a Physarum network. When an agent encounters a previously laid trail it interacts with it under a set of predetermined rules. This behaviour mimics the slime molds tendency to reinforce successful paths that lead to nutrients. By altering the agent and environment parameters listed below you can observe the network transforming as each individual agent interacts with the trails in different ways. Use the buttons above or the keybinds listed below to alter the parameters.</p>
             
           </h3>
           <h3>To adjust agent parameters:</h3>
