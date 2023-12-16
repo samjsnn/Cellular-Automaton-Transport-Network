@@ -45,10 +45,11 @@
         
       }
       #general-text {
-        margin-top: 50px;
+        margin-top: 170px;
         padding-left: 20px;
       }
       #text-container {
+        flex: 1;
         display: flex;
         flex-direction: column;
       }
@@ -57,7 +58,7 @@
       #world {
           border: 1px #ccc none;
           margin: 30px 30px 30px 25px;
-          width: 60%;
+          width: 100%;
           height: auto;
           max-width: 720px;
           max-height: 92vh;
@@ -76,6 +77,33 @@
         color:aquamarine
       }
 
+      #control-buttons button {
+        background-color: #2a612c; /* Green */
+        border: none;
+        color: rgb(231, 231, 231);
+        padding: 3px 3px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 13px;
+        margin: 4px;
+        cursor: pointer;
+        flex: 1 1 48%;
+      }
+
+      #button-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+        width: 40%;
+        text-align: center;
+        margin: 10px;
+        margin-bottom: 20px;
+        align-items: left;
+        max-width: 90%; /* Adjust spacing above and below the button container */
+      }
+
+      
+
       @media screen and (max-width: 768px) {
         #main-container {
           flex-direction: column-reverse; /* Stack elements vertically */
@@ -88,7 +116,7 @@
 
         #world {
           margin: 30px 25px 0px 25px; /* Add some margin around the canvas */
-          width: 90%; /* Adjust width to fit screen */
+          width: 88.5%; /* Adjust width to fit screen */
           height: auto; /* Adjust height accordingly */
         }
 
@@ -100,6 +128,20 @@
         #general-text, #content-wrapper {
           margin-top: 0px;
           padding-left: 15; /* Add spacing between text sections */
+        }
+
+        #button-container {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr); /* Create two columns */
+          gap: 3px; /* Space between buttons */
+          width: 100%; /* Adjust width as needed */
+          margin: 10px 0; /* Adjust top and bottom margin */
+        }
+
+        #control-buttons button {
+          font-size: 8px; /* Even smaller font size for mobile */
+          padding: 3px 3px;
+          margin: 0;
         }
       }
     </style>
@@ -280,7 +322,27 @@ vec3 hsv2rgb (vec3 c)
       <div id="text-container">
         <div id="content-wrapper">
           <h2>Physarum Network Simulation</h2>
-          <!-- Additional content for content-wrapper, if any -->
+          <div id="button-container">
+            <div id="control-buttons">
+            <button id="increase-sensory-angle">Increase Sensory Angle</button>
+            <button id="decrease-sensory-angle">Decrease Sensory Angle</button>
+            
+            <button id="increase-sensory-offset">Increase Sensory Offset</button>
+            <button id="decrease-sensory-offset">Decrease Sensory Offset</button>
+            
+            <button id="increase-turn-angle">Increase Turn Angle</button>
+            <button id="decrease-turn-angle">Decrease Turn Angle</button>
+            
+            <button id="increase-diffusion">Increase Diffusion</button>
+            <button id="decrease-diffusion">Decrease Diffusion</button>
+            
+            <button id="increase-evaporation">Increase Evaporation</button>
+            <button id="decrease-evaporation">Decrease Evaporation</button>
+            
+            <button id="increase-timestep">Increase Timestep</button>
+            <button id="decrease-timestep">Decrease Timestep</button>
+            </div>
+          </div>
         </div>
         <div id="general-text">
           <h3>Brief Description:

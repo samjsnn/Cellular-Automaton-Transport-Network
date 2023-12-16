@@ -14,6 +14,39 @@ const W = 720; //720  W-by-W canvas
 const M = 256; //256 M^2 particles 
 let N = 6000; //1e4 population 
 
+function adjustSensoryAngle(increase) {
+  pu.ang += increase ? 0.04 : -0.04;
+  pu.ang = Math.max(0.04, Math.min(0.24, pu.ang)); // To keep within bounds
+}
+
+function adjustSensoryOffset(increase) {
+  pu.off *= increase ? 1.9 : 1 / 1.9;
+  pu.off = Math.max(Math.pow(1.9, 2) / 720, Math.min(Math.pow(1.9, 6) / 720, pu.off)); // To keep within bounds
+}
+
+function adjustTurnAngle(increase) {
+  pu.trn += increase ? 0.25 : -0.25;
+  pu.trn = Math.max(0, Math.min(1, pu.trn)); // To keep within bounds
+}
+
+function adjustDiffusion(increase) {
+  fu.diff += increase ? 0.06 : -0.06;
+  fu.diff = Math.max(0, Math.min(0.2, fu.diff)); // To keep within bounds
+}
+
+function adjustEvaporation(increase) {
+  fu.evap += increase ? 0.05 : -0.05;
+  fu.evap = Math.max(0.01, Math.min(0.16, fu.evap)); // To keep within bounds
+}
+
+function increaseTimestep() {
+  fastforward *= 2;
+}
+
+function decreaseTimestep() {
+  fastforward /= 2;
+}
+
 // Compile and create shader prog from script elements
 const vquad = makeShader(
   gl,
@@ -99,6 +132,8 @@ const pppploc = gl.getUniformLocation(pppart, "p");
 const pimg = makeProgram(gl, vquad, fimg);
 const pixloc = gl.getAttribLocation(pimg, "x");
 const pifloc = gl.getUniformLocation(pimg, "f");
+
+
 
 // two textures / framebuffers for ping-ponging the field
 const texadata = new Uint8Array(W * W * 4);
@@ -213,7 +248,7 @@ const pu = {
   p: 2,
   f: 0,
   t: 0,
-  off: Math.pow(1.9, 5) / 720, // sensory offset
+  off: Math.pow(1.9, 5.5) / 720, // 7 og5 sensory offset
   ang: 0.16, //0.16  sensory angle
   trn: 0.75, //0.75  turn angle
 };
@@ -251,59 +286,7 @@ canv.addEventListener("wheel", (ev) => {
 
 window.addEventListener("keydown", (ev) => {
   switch (ev.key.toUpperCase()) {
-    // agent parameters
-
-    case "A": // adjust sensory angle
-      pu.ang -= 0.04;
-      break;
-    case "S": // adjust sensory angle 
-      pu.ang += 0.04;
-      break;
-
-    case "O": // adjust sensory offset
-      pu.off /= 1.9;
-      break;
-    case "P":
-      pu.off *= 1.9;
-      break;
-
-    case "T": // adjust turn angle
-      pu.trn -= 0.25;
-      break;
-    case "Y":
-      pu.trn += 0.25;
-      break;
-
-    // environment parameters
-    case "E": // adjust pheremone evaporation
-      fu.evap -= 0.05;
-      break;
-    case "R":
-      fu.evap += 0.05;
-      break;
-
-    case "D": //adjust diffusion
-      fu.diff -= 0.06;
-      break;
-    case "F":
-      fu.diff += 0.06;
-      break;
-
-    // environment parameters
-    case "E":
-      fu.evap -= 0.05;
-      break;
-    case "R":
-      fu.evap += 0.05;
-      break;
-
-    case "D":
-      fu.diff -= 0.06;
-      break;
-    case "F":
-      fu.diff += 0.06;
-      break;
-
+  
     case "ARROWUP":
       fastforward *= 2;
       break;
@@ -311,6 +294,20 @@ window.addEventListener("keydown", (ev) => {
     case "ARROWDOWN":
       fastforward /= 2;
       break;
+
+  
+    case "A": adjustSensoryAngle(false); break;
+    case "S": adjustSensoryAngle(true); break;
+    case "O": adjustSensoryOffset(false); break;
+    case "P": adjustSensoryOffset(true); break;
+    case "T": adjustTurnAngle(false); break;
+    case "Y": adjustTurnAngle(true); break;
+    case "D": adjustDiffusion(false); break;
+    case "F": adjustDiffusion(true); break;
+    case "E": adjustEvaporation(false); break;
+    case "R": adjustEvaporation(true); break;
+    
+
   }
 
   pu.ang = Math.max(0.04, Math.min(0.24, pu.ang));
@@ -330,6 +327,24 @@ window.addEventListener("keydown", (ev) => {
   );
   console.log(`diffusion = ${fu.diff}\nevaporation = ${fu.evap}`);
 });
+
+document.getElementById('increase-sensory-angle').addEventListener('click', () => adjustSensoryAngle(true));
+document.getElementById('decrease-sensory-angle').addEventListener('click', () => adjustSensoryAngle(false));
+
+document.getElementById('increase-sensory-offset').addEventListener('click', () => adjustSensoryOffset(true));
+document.getElementById('decrease-sensory-offset').addEventListener('click', () => adjustSensoryOffset(false));
+
+document.getElementById('increase-turn-angle').addEventListener('click', () => adjustTurnAngle(true));
+document.getElementById('decrease-turn-angle').addEventListener('click', () => adjustTurnAngle(false));
+
+document.getElementById('increase-diffusion').addEventListener('click', () => adjustDiffusion(true));
+document.getElementById('decrease-diffusion').addEventListener('click', () => adjustDiffusion(false));
+
+document.getElementById('increase-evaporation').addEventListener('click', () => adjustEvaporation(true));
+document.getElementById('decrease-evaporation').addEventListener('click', () => adjustEvaporation(false));
+
+document.getElementById('increase-timestep').addEventListener('click', () => increaseTimestep(true));
+document.getElementById('decrease-timestep').addEventListener('click', () => decreaseTimestep(false));
 
 // main loop 
 function timestep() {
