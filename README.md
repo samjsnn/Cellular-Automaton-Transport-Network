@@ -40,7 +40,7 @@ The controls are:
 
 ![sage jenson](https://github.com/samjsnn/Physarum-Transport-Network/assets/106383967/7dbc71d3-dad0-498e-a745-bd714136a298)
 
-_(illustration by Sage Jenson)_
+*(illustration by Sage Jenson)*
 
 
 
