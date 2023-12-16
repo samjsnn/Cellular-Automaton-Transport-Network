@@ -1,4 +1,7 @@
 # Physarum-Polycephalum-Network-Simulation
+The simulation:
+https://samjsnn.github.io/Physarum-Transport-Network/
+
 Physarum Polycephalum is a unicellular organism that exhibits swarm like intelligence in it's ability to form efficient food networks. The goal of this project is to demonstrate how interactions at a micro level lead to the complex emergent behaviours observed in real slime molds.
 
 ![gif4b](https://github.com/samjsnn/Physarum-Transport-Network/assets/106383967/42d7bdcf-e737-4ca0-853b-f51c92bf18d1)
@@ -35,5 +38,7 @@ The controls are:
 
 - E/R: Adjust Evaporation Rate
 
-The simulation:
-https://samjsnn.github.io/Physarum-Transport-Network/
+![sage jenson](https://github.com/samjsnn/Physarum-Transport-Network/assets/106383967/7dbc71d3-dad0-498e-a745-bd714136a298)
+
+
+
