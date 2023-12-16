@@ -67,7 +67,7 @@
       /* Text Content Style */
       #text-content {
         max-width: 400px;
-        margin-right: 20px; /* Adjust as needed */
+        margin-right: 20px; 
       }
 
       #credits {
@@ -84,10 +84,19 @@
         padding: 3px 3px;
         text-align: center;
         text-decoration: none;
+        border-radius: 5px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
         font-size: 13px;
         margin: 4px;
         cursor: pointer;
         flex: 1 1 48%;
+      }
+
+      #control-buttons button:hover {
+        background: linear-gradient(to right, #0f310f, #1c5f22); /* Change gradient on hover */
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Larger shadow on hover */
+        transform: translateY(-2px); 
       }
 
       #button-container {
@@ -115,38 +124,38 @@
         }
 
         #world {
-          margin: 30px 25px 0px 25px; /* Add some margin around the canvas */
-          width: 88.5%; /* Adjust width to fit screen */
-          height: auto; /* Adjust height accordingly */
+          margin: 30px 25px 0px 25px; 
+          width: 88.5%; 
+          height: auto; 
         }
 
         #text-container {
           width: 90%;
-          margin-top: 20px;
+          margin-top: 5px;
         }
 
         #general-text, #content-wrapper {
           margin-top: 0px;
-          padding-left: 15; /* Add spacing between text sections */
+          padding-left: 15; 
         }
 
         #button-container {
           display: grid;
-          grid-template-columns: repeat(2, 1fr); /* Create two columns */
-          gap: 3px; /* Space between buttons */
-          width: 100%; /* Adjust width as needed */
-          margin: 10px 0; /* Adjust top and bottom margin */
+          grid-template-columns: repeat(2, 1fr); 
+          gap: 3px; 
+          width: 100%; 
+          margin: 10px 0; 
         }
 
         #control-buttons button {
-          font-size: 8px; /* Even smaller font size for mobile */
+          font-size: 8px; 
           padding: 3px 3px;
           margin: 0;
         }
       }
     </style>
 
-    <!-- JavaScript and GLSL scripts... -->
+    
     <script src = "gl.js"></script>
     
     <!-- quad vertices-->
