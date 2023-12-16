@@ -39,7 +39,6 @@ The controls are:
 - E/R: Adjust Evaporation Rate
 
 ![sage jenson](https://github.com/samjsnn/Physarum-Transport-Network/assets/106383967/7dbc71d3-dad0-498e-a745-bd714136a298)
-
 *(illustration by Sage Jenson)*
 
 
